@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G.C.E NOV-DEC WASSCE 2025 - Private WASSCE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Your original styles */
+        @keyframes pulse-fade {
+            0%, 100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        .loading-animation {
+            animation: pulse-fade 2s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Subtle glow */
+        }
+        
+        /* New style for timer completion */
+        .timer-complete {
+            text-shadow: 0 0 15px rgba(60, 255, 60, 0.9);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <header class="text-center py-6 bg-gray-800 shadow-xl">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
+            G.C.E NOV-DEC WASSCE 2025
+        </h1>
+        <p class="text-md sm:text-lg mt-1 text-yellow-400 font-semibold mb-2">
+            (Private WASSCE)
+        </p>
+
+        <div class="text-sm sm:text-base text-gray-300 font-medium bg-red-700 inline-block px-4 py-1 rounded-full border border-red-500">
+            <span class="text-red-300 mr-2">📅 Exam Date:</span> Monday, 17th November, 2025
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        
+        <section class="text-center my-10 p-6 bg-gray-700/50 rounded-xl backdrop-blur-sm border-4 border-yellow-400 shadow-2xl">
+            <div id="countdown-container" class="loading-animation">
+                <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300">
+                    <span class="text-green-400">English Language</span>: Content Available In:
+                </p>
+                <div class="mt-3">
+                    <p id="countdown-timer" class="text-5xl font-mono text-red-500"></p>
+                </div>
+                <svg class="mx-auto mt-3 w-12 h-12 text-yellow-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <section class="w-full max-w-xl mt-8 mb-16 text-center">
+            
+            <h2 class="text-2xl font-bold mb-6 text-indigo-400">
+                Examination Schedule
+            </h2>
+
+            <div class="mb-4 p-3 bg-gray-700/30 rounded-lg border border-indigo-600/50">
+                <p class="text-lg font-bold text-teal-400">PC3023/A: English Language 3 (Oral)</p>
+                <div class="text-gray-300 mt-1">
+                    <span class="text-sm">Duration: 45mins</span>
+                    <p class="text-xl font-mono text-yellow-200 my-1">08:30 hrs – 09:15 hrs.</p>
+                    <span class="text-sm text-indigo-300 font-semibold">(1st Set)</span>
+                </div>
+            </div>
+
+            <hr class="border-gray-700 w-1/3 mx-auto my-6">
+
+            <div class="p-3 bg-gray-700/30 rounded-lg border border-indigo-600/50">
+                <p class="text-lg font-bold text-teal-400">PC3023/A: English Language 3 (Oral)</p>
+                <div class="text-gray-300 mt-1">
+                    <span class="text-sm">Duration: 45mins</span>
+                    <p class="text-xl font-mono text-yellow-200 my-1">09:45 hrs – 10:30 hrs.</p>
+                    <span class="text-sm text-indigo-300 font-semibold">(2nd Set)</span>
+                </div>
+            </div>
+            
+        </section>
+        
+    </main>
+    
+    <footer class="text-center py-3 text-gray-400 text-xs bg-gray-800 mt-auto">
+        &copy; 2025 WASSCE Information Portal. All rights reserved.
+    </footer>
+
+    <script>
+        // Target date: Monday, November 17, 2025 at 5:00 AM (05:00:00)
+        // Note: Months are 0-indexed in JavaScript (November is 10)
+        const targetDate = new Date(2025, 10, 17, 5, 0, 0).getTime();
+        const countdownTimerEl = document.getElementById('countdown-timer');
+        const countdownContainerEl = document.getElementById('countdown-container');
+
+        // Function to update the timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            let distance = targetDate - now;
+
+            // If the countdown is over
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownTimerEl.innerHTML = "NOW AVAILABLE!";
+                countdownTimerEl.classList.remove('text-red-500');
+                countdownTimerEl.classList.add('text-green-400', 'timer-complete');
+                countdownContainerEl.classList.remove('loading-animation');
+                return;
+            }
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Format the output (adds leading zero if number is < 10)
+            const formatTime = (time) => String(time).padStart(2, '0');
+
+            // Display the result in the element
+            countdownTimerEl.innerHTML = `${formatTime(days)}d ${formatTime(hours)}h ${formatTime(minutes)}m ${formatTime(seconds)}s`;
+            
+            // Note: By using the fixed targetDate (instead of localStorage), the timer is inherently persistent
+            // as it always calculates the time remaining based on the current time and the fixed future date.
+            // If you needed the timer to *stop* counting down when the user closes the tab, then *resume*
+            // from that exact point on refresh, you would use localStorage to store the *remaining time* instead of the *target time*.
+            // For a countdown *to a fixed event*, storing the target date is often sufficient and more robust.
+        }
+
+        // Run the function immediately
+        updateCountdown();
+
+        // Update the count down every 1 second
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
